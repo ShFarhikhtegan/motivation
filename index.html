@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
     <style>
         :root {
             --primary-color: #6c5ce7;
@@ -204,6 +205,86 @@
             z-index: -1;
         }
         
+        /* استایل‌های گالری بهینه‌شده */
+        .gallery-section {
+            padding: 30px;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            font-size: 13px;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        /* استایل‌های Lightbox */
+        .lightbox .lb-image {
+            border-radius: 8px;
+        }
+
+        .lb-data .lb-caption {
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: center;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        .lb-nav a.lb-prev, 
+        .lb-nav a.lb-next {
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .lb-nav a.lb-prev:hover, 
+        .lb-nav a.lb-next:hover {
+            opacity: 1;
+        }
+
+        .lb-close {
+            transition: opacity 0.3s;
+        }
+
+        .lb-close:hover {
+            opacity: 0.8;
+        }
+        
+        /* بقیه استایل‌ها... */
         .download-section {
             padding: 30px;
             margin: 30px 0;
@@ -634,6 +715,10 @@
             .footer-links {
                 margin-bottom: 30px;
             }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
         }
     </style>
 </head>
@@ -657,6 +742,9 @@
                 <a class="nav-link active" href="#progress-section">پیشرفت پروژه</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="#gallery-section">گالری تصاویر</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#goal-section">هدف پروژه</a>
             </li>
             <li class="nav-item">
@@ -678,7 +766,7 @@
                 <div class="stat-card glass-card highlight-stat">
                     <div class="stat-value">
                         <i class="fas fa-coins"></i>
-                        <span id="collected-amount">248,000,000</span>&nbsp; تومان
+                        <span id="collected-amount">616,000,000</span>&nbsp; تومان
                     </div>
                     <div class="stat-label">جمع واریزی‌ها</div>
                 </div>
@@ -686,12 +774,71 @@
                 <div class="stat-card glass-card">
                     <div class="stat-value">
                         <i class="fas fa-receipt"></i>
-                        <span id="receipts-count">193</span>&nbsp; فیش
+                        <span id="receipts-count">460</span>&nbsp; فیش
                     </div>
                     <div class="stat-label">تعداد فیش‌های واریزی</div>
                 </div>
             </div>
         </div>
+
+      <!-- بخش گالری تصاویر با ساختار اصلی -->
+<div id="gallery-section" class="gallery-section glass-card mb-5">
+    <h3 class="progress-title text-center mb-4">
+        <i class="fas fa-images"></i>
+        گالری تصاویر پروژه
+    </h3>
+    
+    <div class="gallery-grid">
+        <!-- تصاویر با نام‌های اصلی و بدون تغییر -->
+        <div class="gallery-item">
+            <a href="images/phase1.jpg" data-lightbox="project-gallery">
+                <img src="images/phase1.jpg" alt="تصویر پروژه">
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <a href="images/phase2.jpg" data-lightbox="project-gallery">
+                <img src="images/phase2.jpg" alt="تصویر پروژه">
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <a href="images/phase3.jpg" data-lightbox="project-gallery">
+                <img src="images/phase3.jpg" alt="تصویر پروژه">
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <a href="images/phase4.jpg" data-lightbox="project-gallery">
+                <img src="images/phase4.jpg" alt="تصویر پروژه">
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <a href="images/phase5.jpg" data-lightbox="project-gallery">
+                <img src="images/phase5.jpg" alt="تصویر پروژه">
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <a href="images/phase6.jpg" data-lightbox="project-gallery">
+                <img src="images/phase6.jpg" alt="تصویر پروژه">
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <a href="images/phase7.jpg" data-lightbox="project-gallery">
+                <img src="images/phase7.jpg" alt="تصویر پروژه">
+            </a>
+        </div>
+        
+        <div class="gallery-item">
+            <a href="images/phase8.jpg" data-lightbox="project-gallery">
+                <img src="images/phase8.jpg" alt="تصویر پروژه">
+            </a>
+        </div>
+    </div>
+</div>
 
         <!-- بخش اطلاعات بانکی -->
         <div id="bank-section" class="bank-info glass-card">
@@ -714,7 +861,7 @@
         <div id="whatsapp-section" class="whatsapp-group glass-card">
             <h4><i class="fab fa-whatsapp"></i>گروه واتساپ شهرک فرهیختگان</h4>
             <p>برای ارتباط با سایر اعضا و دریافت آخرین اخبار، به گروه واتساپ شهرک فرهیختگان بپیوندید:</p>
-            <a href="https://chat.whatsapp.com/EsTWRiae08jDrPEhVuDf3B" target="_blank" class="whatsapp-btn">
+            <a href="https://chat.whatsapp.com/Lnx1y8wOpqiDxQnaBYr46w" target="_blank" class="whatsapp-btn">
                 <i class="fab fa-whatsapp"></i> عضویت در گروه
             </a>
         </div>
@@ -750,6 +897,7 @@
                         <h5>لینک‌های سریع</h5>
                         <ul>
                             <li><a href="#progress-section">پیشرفت پروژه</a></li>
+                            <li><a href="#gallery-section">گالری تصاویر</a></li>
                             <li><a href="#goal-section">هدف پروژه</a></li>
                             <li><a href="#bank-section">اطلاعات بانکی</a></li>
                             <li><a href="#whatsapp-section">گروه واتساپ</a></li>
@@ -789,10 +937,13 @@
         <i class="fas fa-arrow-up"></i>
     </div>
 
+    <!-- اسکریپت‌های مورد نیاز -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <script>
         // تنظیمات پروژه
-        let collectedAmount = 650000000; // مبلغ جمع‌آوری شده: 248,000,000 تومان
-        let receiptsCount = 486; // تعداد فیش‌های واریزی
+        let collectedAmount = 655000000; // مبلغ جمع‌آوری شده: 616,000,000 تومان
+        let receiptsCount = 488; // تعداد فیش‌های واریزی
         
         // تابع برای فرمت کردن اعداد با جداکننده هزارگان
         function formatNumber(number) {
@@ -865,6 +1016,17 @@
                 void highlightStat.offsetWidth; // Trigger reflow
                 highlightStat.style.animation = 'pulse-glow 2s infinite alternate';
             }, 5000);
+
+            // تنظیمات Lightbox
+            lightbox.option({
+                'resizeDuration': 200,
+                'wrapAround': true,
+                'albumLabel': 'تصویر %1 از %2',
+                'disableScrolling': true,
+                'fadeDuration': 300,
+                'positionFromTop': 100,
+                'alwaysShowNavOnTouchDevices': true
+            });
         });
     </script>
 </body>
