@@ -212,8 +212,9 @@
         
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 15px;
+            margin-bottom: 20px;
         }
         
         .gallery-item {
@@ -242,46 +243,20 @@
             left: 0;
             background: rgba(0, 0, 0, 0.7);
             color: white;
-            padding: 10px;
-            font-size: 13px;
-            text-align: center;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-        
-        .gallery-item:hover .gallery-caption {
-            transform: translateY(0);
-        }
-        
-        /* استایل‌های Lightbox */
-        .lightbox .lb-image {
-            border-radius: 8px;
-        }
-
-        .lb-data .lb-caption {
+            padding: 8px;
             font-size: 16px;
-            line-height: 1.6;
             text-align: center;
-            font-family: 'Vazirmatn', sans-serif;
         }
-
-        .lb-nav a.lb-prev, 
-        .lb-nav a.lb-next {
-            opacity: 0.8;
-            transition: opacity 0.3s;
+        
+        /* انیمیشن‌های جدید */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        .lb-nav a.lb-prev:hover, 
-        .lb-nav a.lb-next:hover {
-            opacity: 1;
-        }
-
-        .lb-close {
-            transition: opacity 0.3s;
-        }
-
-        .lb-close:hover {
-            opacity: 0.8;
+        
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(20px); }
         }
         
         /* بقیه استایل‌ها... */
@@ -312,6 +287,7 @@
             margin: 0 10px;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
         
         .download-btn::after {
@@ -717,7 +693,7 @@
             }
             
             .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             }
         }
     </style>
@@ -781,64 +757,102 @@
             </div>
         </div>
 
-      <!-- بخش گالری تصاویر با ساختار اصلی -->
-<div id="gallery-section" class="gallery-section glass-card mb-5">
-    <h3 class="progress-title text-center mb-4">
-        <i class="fas fa-images"></i>
-        گالری تصاویر 
-    </h3>
-    
-    <div class="gallery-grid">
-        <!-- تصاویر با نام‌های اصلی و بدون تغییر -->
-        <div class="gallery-item">
-            <a href="images/phase1.jpg" data-lightbox="project-gallery">
-                <img src="images/phase1.jpg" alt="تصویر پروژه">
-            </a>
+        <!-- بخش گالری تصاویر با 12 تصویر -->
+        <div id="gallery-section" class="gallery-section glass-card mb-5">
+            <h3 class="progress-title text-center mb-4">
+                <i class="fas fa-images"></i>
+                گالری تصاویر پروژه
+            </h3>
+            
+            <!-- گالری جمع‌شده -->
+            <div class="gallery-grid" id="collapsed-gallery">
+                <!-- نمایش 6 تصویر اول به صورت جمع‌شده -->
+                <div class="gallery-item">
+                    <a href="images/phase1.jpg" data-lightbox="project-gallery" data-title="تصویر ۱ از پروژه">
+                        <img src="images/phase1.jpg" alt="تصویر ۱">
+                        <div class="gallery-caption">تصویر ۱</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="images/phase2.jpg" data-lightbox="project-gallery" data-title="تصویر ۲ از پروژه">
+                        <img src="images/phase2.jpg" alt="تصویر ۲">
+                        <div class="gallery-caption">تصویر ۲</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="images/phase3.jpg" data-lightbox="project-gallery" data-title="تصویر ۳ از پروژه">
+                        <img src="images/phase3.jpg" alt="تصویر ۳">
+                        <div class="gallery-caption">تصویر ۳</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="images/phase4.jpg" data-lightbox="project-gallery" data-title="تصویر ۴ از پروژه">
+                        <img src="images/phase4.jpg" alt="تصویر ۴">
+                        <div class="gallery-caption">تصویر ۴</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="images/phase5.jpg" data-lightbox="project-gallery" data-title="تصویر ۵ از پروژه">
+                        <img src="images/phase5.jpg" alt="تصویر ۵">
+                        <div class="gallery-caption">تصویر ۵</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="images/phase6.jpg" data-lightbox="project-gallery" data-title="تصویر ۶ از پروژه">
+                        <img src="images/phase6.jpg" alt="تصویر ۶">
+                        <div class="gallery-caption">تصویر ۶</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- گالری گسترده (مخفی در ابتدا) -->
+            <div class="gallery-grid" id="expanded-gallery" style="display: none;">
+                <!-- 6 تصویر باقیمانده -->
+                <div class="gallery-item">
+                    <a href="images/phase7.jpg" data-lightbox="project-gallery" data-title="تصویر ۷ از پروژه">
+                        <img src="images/phase7.jpg" alt="تصویر ۷">
+                        <div class="gallery-caption">تصویر ۷</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="images/phase8.jpg" data-lightbox="project-gallery" data-title="تصویر ۸ از پروژه">
+                        <img src="images/phase8.jpg" alt="تصویر ۸">
+                        <div class="gallery-caption">تصویر ۸</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="images/phase9.jpg" data-lightbox="project-gallery" data-title="تصویر ۹ از پروژه">
+                        <img src="images/phase9.jpg" alt="تصویر ۹">
+                        <div class="gallery-caption">تصویر ۹</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="images/phase10.jpg" data-lightbox="project-gallery" data-title="تصویر ۱۰ از پروژه">
+                        <img src="images/phase10.jpg" alt="تصویر ۱۰">
+                        <div class="gallery-caption">تصویر ۱۰</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="images/phase11.jpg" data-lightbox="project-gallery" data-title="تصویر ۱۱ از پروژه">
+                        <img src="images/phase11.jpg" alt="تصویر ۱۱">
+                        <div class="gallery-caption">تصویر ۱۱</div>
+                    </a>
+                </div>
+                <div class="gallery-item">
+                    <a href="images/phase12.jpg" data-lightbox="project-gallery" data-title="تصویر ۱۲ از پروژه">
+                        <img src="images/phase12.jpg" alt="تصویر ۱۲">
+                        <div class="gallery-caption">تصویر ۱۲</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- دکمه نمایش بیشتر -->
+            <div class="text-center mt-4">
+                <button id="show-more-btn" class="download-btn">
+                    <i class="fas fa-chevron-down me-2"></i>نمایش تمام تصاویر
+                </button>
+            </div>
         </div>
-        
-        <div class="gallery-item">
-            <a href="images/phase2.jpg" data-lightbox="project-gallery">
-                <img src="images/phase2.jpg" alt="تصویر پروژه">
-            </a>
-        </div>
-        
-        <div class="gallery-item">
-            <a href="images/phase3.jpg" data-lightbox="project-gallery">
-                <img src="images/phase3.jpg" alt="تصویر پروژه">
-            </a>
-        </div>
-        
-        <div class="gallery-item">
-            <a href="images/phase4.jpg" data-lightbox="project-gallery">
-                <img src="images/phase4.jpg" alt="تصویر پروژه">
-            </a>
-        </div>
-        
-        <div class="gallery-item">
-            <a href="images/phase5.jpg" data-lightbox="project-gallery">
-                <img src="images/phase5.jpg" alt="تصویر پروژه">
-            </a>
-        </div>
-        
-        <div class="gallery-item">
-            <a href="images/phase6.jpg" data-lightbox="project-gallery">
-                <img src="images/phase6.jpg" alt="تصویر پروژه">
-            </a>
-        </div>
-        
-        <div class="gallery-item">
-            <a href="images/phase7.jpg" data-lightbox="project-gallery">
-                <img src="images/phase7.jpg" alt="تصویر پروژه">
-            </a>
-        </div>
-        
-        <div class="gallery-item">
-            <a href="images/phase8.jpg" data-lightbox="project-gallery">
-                <img src="images/phase8.jpg" alt="تصویر پروژه">
-            </a>
-        </div>
-    </div>
-</div>
 
         <!-- بخش اطلاعات بانکی -->
         <div id="bank-section" class="bank-info glass-card">
@@ -861,7 +875,7 @@
         <div id="whatsapp-section" class="whatsapp-group glass-card">
             <h4><i class="fab fa-whatsapp"></i>گروه واتساپ شهرک فرهیختگان</h4>
             <p>برای ارتباط با سایر اعضا و دریافت آخرین اخبار، به گروه واتساپ شهرک فرهیختگان بپیوندید:</p>
-            <a href="https://https://chat.whatsapp.com/EsTWRiae08jDrPEhVuDf3B?mode=r_t" class="whatsapp-btn">
+            <a href="https://chat.whatsapp.com/EsTWRiae08jDrPEhVuDf3B" class="whatsapp-btn">
                 <i class="fab fa-whatsapp"></i> عضویت در گروه
             </a>
         </div>
@@ -871,11 +885,13 @@
             <h3><i class="fas fa-bullseye me-2"></i>هدف پروژه برق‌رسانی شهرک فرهیختگان</h3>
             
             <p>مالکان محترم شهرک فرهیختگان</p>
-            با پیگیری‌های مستمر و همکاری‌های صورت‌گرفته، مجوز برق‌رسانی فاز ۱ شهرک فرهیختگان (شامل بازارچه و خیابان‌ اطراف) اخذ شده و آماده اجرا است. .</p>
+            <p>با پیگیری‌های مستمر و همکاری‌های صورت‌گرفته، مجوز برق‌رسانی فاز ۱ شهرک فرهیختگان (شامل بازارچه و خیابان‌ اطراف) اخذ شده و آماده اجرا است.</p>
             
-            <p> در شرایط عادی، اداره برق یا سایر نهادهای دولتی برای شهرک‌های جدید تنها پس از طی مراحل قانونی، تصویب طرح و تأمین بودجه دولتی وارد عمل می‌شوند. این فرآیند می‌تواند سال‌ها به‌طول انجامد (گاهی حتی ۴ تا ۵ سال فقط برای نوبت‌بندی طرح). توجه داشته باشید که در مورد شهرکی صحبت می‌کنیم که هیچ‌گونه ساخت‌وسازی در آن آغاز نشده است. در شهرک فرهیختگان، به دلیل نبود ارگان رسمی مسئول پیگیری، تمامی اقدامات از طریق مالکان و همکاری‌های جمعی انجام شده است. به منظور تسریع در روند پروژه و جلوگیری از معطلی سال‌های آینده، از طریق رایزنی‌های ویژه موفق به اخذ مجوز طراحی و شروع عملیات اجرایی شده‌ایم.
-            <p class="highlight"> از مالکان دعوت می‌شود به ازای هر امتیاز مبلغ یک میلیون تومان واریز نمایند و چنانچه تمامی اعضا این مبلغ را پرداخت کنند، مبلغ جمع‌آوری‌شده به‌سرعت برای آغاز پروژه به پیمانکار تحویل داده خواهد شد. به‌خاطر عدم وجود نهاد دولتی یا تعاونی پیگیر، این مبلغ باید از سوی مالکان زمین‌ها تأمین شود. مبلغ جمع‌آوری‌شده به‌طور کامل صرف قرارداد با پیمانکار و نصب تجهیزات خواهد شد.</p>
-            در واقع، ما در حال پیشبرد مرحله‌ای اساسی و زیرساختی با هزینه شخصی هستیم تا زمین‌ها وارد مدار رونق شوند. در غیر این صورت، ممکن است سال‌ها منتظر بمانیم. بر اساس تجربه پروژه‌های مشابه، ورود برق به شهرک می‌تواند ارزش زمین‌ها را را به شکل چشمگیری افزایش می‌دهد، چرا که زمین از حالت بلااستفاده خارج شده و آماده برای ساخت‌وساز و سرمایه‌گذاری می‌شود. لذا از مالکان محترم خواهشمندیم که هرچه سریع‌تر این مبلغ ناچیز را پرداخت کرده و ان‌شاءالله همه در رشد و رونق شهرک سهیم شویم.</p>
+            <p>در شرایط عادی، اداره برق یا سایر نهادهای دولتی برای شهرک‌های جدید تنها پس از طی مراحل قانونی، تصویب طرح و تأمین بودجه دولتی وارد عمل می‌شوند. این فرآیند می‌تواند سال‌ها به‌طول انجامد (گاهی حتی ۴ تا ۵ سال فقط برای نوبت‌بندی طرح). توجه داشته باشید که در مورد شهرکی صحبت می‌کنیم که هیچ‌گونه ساخت‌وسازی در آن آغاز نشده است. در شهرک فرهیختگان، به دلیل نبود ارگان رسمی مسئول پیگیری، تمامی اقدامات از طریق مالکان و همکاری‌های جمعی انجام شده است. به منظور تسریع در روند پروژه و جلوگیری از معطلی سال‌های آینده، از طریق رایزنی‌های ویژه موفق به اخذ مجوز طراحی و شروع عملیات اجرایی شده‌ایم.</p>
+            
+            <p class="highlight">از مالکان دعوت می‌شود به ازای هر امتیاز مبلغ یک میلیون تومان واریز نمایند و چنانچه تمامی اعضا این مبلغ را پرداخت کنند، مبلغ جمع‌آوری‌شده به‌سرعت برای آغاز پروژه به پیمانکار تحویل داده خواهد شد. به‌خاطر عدم وجود نهاد دولتی یا تعاونی پیگیر، این مبلغ باید از سوی مالکان زمین‌ها تأمین شود. مبلغ جمع‌آوری‌شده به‌طور کامل صرف قرارداد با پیمانکار و نصب تجهیزات خواهد شد.</p>
+            
+            <p>در واقع، ما در حال پیشبرد مرحله‌ای اساسی و زیرساختی با هزینه شخصی هستیم تا زمین‌ها وارد مدار رونق شوند. در غیر این صورت، ممکن است سال‌ها منتظر بمانیم. بر اساس تجربه پروژه‌های مشابه، ورود برق به شهرک می‌تواند ارزش زمین‌ها را به شکل چشمگیری افزایش دهد، چرا که زمین از حالت بلااستفاده خارج شده و آماده برای ساخت‌وساز و سرمایه‌گذاری می‌شود. لذا از مالکان محترم خواهشمندیم که هرچه سریع‌تر این مبلغ ناچیز را پرداخت کرده و ان‌شاءالله همه در رشد و رونق شهرک سهیم شویم.</p>
         </div>
     </div>
 
@@ -1026,6 +1042,31 @@
                 'fadeDuration': 300,
                 'positionFromTop': 100,
                 'alwaysShowNavOnTouchDevices': true
+            });
+
+            // نمایش گالری گسترده با انیمیشن
+            document.getElementById('show-more-btn').addEventListener('click', function() {
+                const expandedGallery = document.getElementById('expanded-gallery');
+                const btn = this;
+                
+                if (expandedGallery.style.display === 'none') {
+                    // نمایش با انیمیشن
+                    expandedGallery.style.display = 'grid';
+                    expandedGallery.style.animation = 'fadeIn 0.5s ease-out';
+                    btn.innerHTML = '<i class="fas fa-chevron-up me-2"></i>بستن تصاویر';
+                } else {
+                    // پنهان کردن با انیمیشن
+                    expandedGallery.style.animation = 'fadeOut 0.3s ease-out';
+                    setTimeout(() => {
+                        expandedGallery.style.display = 'none';
+                    }, 300);
+                    btn.innerHTML = '<i class="fas fa-chevron-down me-2"></i>نمایش تمام تصاویر';
+                }
+                
+                // اسکرول به بخش گالری
+                document.getElementById('gallery-section').scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
     </script>
